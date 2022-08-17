@@ -16,6 +16,7 @@ int main()
         scanf("%d",&temp);
         if(temp<=bs){
             c[i]=a[i]-temp;
+            a[i]=temp;
             printf("\ninternal fragmentation for this block %d",c[i]);
         }
         else{
