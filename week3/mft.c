@@ -8,14 +8,12 @@ int main()
     printf("\nenter no. of process:");
     scanf("%d",&p);
     bs=memory/p;
-    for(i=0;i<p;i++)
-        a[i]=bs;
     for(i=0;i<p;i++){
         label:
         printf("\nenter memory for %d processes:",i);
         scanf("%d",&temp);
         if(temp<=bs){
-            c[i]=a[i]-temp;
+            c[i]=bs-temp;
             a[i]=temp;
             printf("\ninternal fragmentation for this block %d",c[i]);
         }
