@@ -20,7 +20,7 @@ void main(){
 #define MAX 50
 int main()
 {
-    int page[MAX],i,n,f,ps,off,pno,base=9221;
+    int page[MAX],i,n,f,ps,logical,pno,offset=9221;
     int choice=0;
     printf("\nEnter the no of  pages in memory: ");
     scanf("%d",&n);
@@ -40,12 +40,12 @@ int main()
     }
     do
     {
-        printf("\n\nEnter the logical address(i.e,page no & offset):");
-        scanf("%d%d",&pno,&off);
+        printf("\n\nEnter the page no. and logical address:");
+        scanf("%d%d",&pno,&logical);
         if(page[pno]==-1)
             printf("\n\nThe required page is not available in any of frames");
         else
-            printf("\n\nPhysical address(i.e,frame no & offset):%d,%d",page[pno],base+off);
+            printf("\n\nFrame number and Physical address is  %d,%d",page[pno],offset+logical);
         printf("\nDo you want to continue(1/0)?:");
         scanf("%d",&choice);
     }while(choice==1);
