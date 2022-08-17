@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <string.h>
+#include<io.h>
 
 void createDir(char path[]) {
-    mkdir(path, 0700);
+    mkdir(path);
 }
 
 void createFile(char path[]) {
