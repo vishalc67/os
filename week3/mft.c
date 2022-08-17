@@ -5,7 +5,7 @@ int main()
     float bs,memory;
     printf("\nenter total memory:");
     scanf("%f",&memory);
-    printf("\nenter no. of process:");
+    printf("\nenter no. of partition:");
     scanf("%d",&p);
     bs=memory/p;
     for(i=0;i<p;i++)
