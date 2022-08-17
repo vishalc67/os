@@ -1,53 +1,28 @@
 #include<stdio.h>
-#include<stdlib.h>
-void main(){
-
-    int np, ps, i;
-    int *sa;
-    printf("Enter how many pages: ");
-    scanf("%d",&np);
-    printf("Enter page size: ");
-    scanf("%d",&ps);
-    for(i=0;i<np;i++) {
-        sa[i] = (int)malloc(ps);
-        printf("Page %d address is %d\n", i, sa[i]);
-    }
-}
-
-
-------------------------------------------------or--------------------------------------------------
-#include<stdio.h>
-#define MAX 50
-int main()
+void main()
 {
-    int page[MAX],i,n,f,ps,logical,pno,offset=9221;
-    int choice=0;
-    printf("\nEnter the no of  pages in memory: ");
-    scanf("%d",&n);
-    printf("\nEnter page size: ");
-    scanf("%d",&ps);
-    printf("\nEnter no of frames: ");
-    scanf("%d",&f);
-    for(i=0;i<n;i++)
-        page[i]=-1;
-    printf("\nEnter the page table\n");
-    printf("(Enter frame no as -1 if that page is not present in any frame)\n\n");
-    printf("\npageno\tframeno\n-------\t-------");
-    for(i=0;i<n;i++)
-    {
-        printf("\n\n%d\t\t",i);
-        scanf("%d",&page[i]);
-    }
-    do
-    {
-        printf("\n\nEnter the page no. and logical address:");
-        scanf("%d%d",&pno,&logical);
-        if(page[pno]==-1)
-            printf("\n\nThe required page is not available in any of frames");
-        else
-            printf("\n\nFrame number and Physical address is  %d,%d",page[pno],offset+logical);
-        printf("\nDo you want to continue(1/0)?:");
-        scanf("%d",&choice);
-    }while(choice==1);
-    return 1;
+int memsize=15,choice=0,pagesize,nofpage,frameno,offset,logadd,phyadd,i;
+int p[100];
+printf("\nYour memsize is %d ",memsize);
+printf("\nEnter page size:");
+scanf("%d",&pagesize);
+
+nofpage=memsize/pagesize;
+
+for(i=0;i<nofpage;i++)
+{
+printf("\nEnter the frame of page%d:",i+1);
+scanf("%d",&p[i]);
 }
+
+do
+{
+printf("\nEnter a logical address:");
+scanf("%d",&logadd);
+frameno=logadd/pagesize;
+offset=logadd%pagesize;
+phyadd=(p[frameno]*pagesize)+offset;
+printf("\nPhysical address is:%d",phyadd);
+printf("\nDo you want to continue(1/0)?:");
+scanf("%d",&choice);
+}while(choice==1);
