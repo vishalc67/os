@@ -1,52 +1,38 @@
 #include<stdio.h>
-int n,nf,in[100],p[50],i,j,k,pgfaultcnt=0;
-
-int isHit(int data){
-    for(j=0; j<nf; j++)
-        if(p[j]==data)
+int f[10],n,p[50],nf,pgfault=0,idx=0;
+float rate;
+int check(int temp){
+    for(int i=0;i<nf;i++)
+        if(temp==f[i])
             return 1;
     return 0;
 }
-void dispPages(){
-    for (k=0; k<nf; k++)
-        if(p[k]!=9999)
-            printf(" %d",p[k]);
-}
-void repeat(){
-    for(k=0; k<nf-1; k++)
-        p[k]=p[k+1];
-    p[k]=in[i];
+void display(){
+    for(int i=0;i<nf;i++)
+        if(f[i]!=-1)
+            printf(" %d",f[i]);
 }
 void fifo(){
-    for(i=0; i<n; i++){
-        printf("\nFor %d :",in[i]);
-        if(isHit(in[i])==0){
-            repeat();
-            pgfaultcnt++;
-            dispPages();
+    for(int i=0;i<n;i++){
+        if(check(p[i])==0){
+            f[idx++%nf] = p[i];
+            pgfault++;
         }
-        else{
-            // repeat();
-            dispPages();
-            printf(" NO fault");
-        }
+        printf("\n For %d:",p[i]);
+        display();
     }
 }
-
-int main(){
-    printf("Enter length of page reference sequence:");
+void main(){
+    printf("\nEnter sequence length:");
     scanf("%d",&n);
-    printf("Enter the page reference sequence:");
-    for(i=0; i<n; i++)
-        scanf("%d",&in[i]);
-    printf("Enter no of frames:");
+    printf("\nEnter sequence:");
+    for(int i=0;i<n;i++)
+        scanf("%d",&p[i]);
+    printf("\nEnter number of frames:");
     scanf("%d",&nf);
-    pgfaultcnt=0;
-    for(i=0; i<nf; i++)
-        p[i]=9999;
+    for(int i=0;i<nf;i++)
+        f[i]=-1;
     fifo();
-    printf("\nTotal no of page faults:%d",pgfaultcnt);
-    float pfr = pgfaultcnt*100/n;
-    printf("\nPage Fault Rate:%f",pfr);
-    return 0;
+    rate = pgfault*100/n;
+    printf("\nPage faults are:%d\nPage fault rate is %f",pgfault,rate);
 }
