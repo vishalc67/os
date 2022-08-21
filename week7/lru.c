@@ -39,17 +39,12 @@ void repeat(){
 }
 void lru(){
     for(i=0; i<n; i++){
-        printf("\nFor %d :",in[i]);
         if(isHit(in[i])==0){
             repeat();
             pgfaultcnt++;
-            dispPages();
         }
-        else{
-            // repeat();
-            dispPages();
-            printf(" NO Fault!");
-        }
+        printf("\nFor %d :",in[i]);
+        dispPages();    
     }
 }
 
