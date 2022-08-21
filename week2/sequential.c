@@ -19,8 +19,7 @@ void main()
                 sb++;
             }
             printf("\nThe file is allocated");
-        }
-        else{
+        }else{
             printf("\nThe file is already allocated");
         }
         printf("\nEnter 0 to exit:");
