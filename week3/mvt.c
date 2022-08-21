@@ -14,7 +14,6 @@ int main()
         }
         else{
             printf("\nrequired memory is not available");
-            break;
         }
         printf("\nenter 0 to exit");
         scanf("%d",&c);
