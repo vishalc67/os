@@ -33,7 +33,7 @@ int main(){
     for (i=1;i<n;i++){
         p[i].ct=p[i-1].ct+p[i].bt;
         p[i].tat=p[i].ct-p[i].at;
-        p[i].wt=p[i-1].ct-p[i].at;
+        p[i].wt=p[i].tat-p[i].bt;
         avgtat+=p[i].tat;
         avgwt+=p[i].wt;
         
