@@ -3,7 +3,6 @@ struct fcfs
 {
     int bt,at,tat,wt,no,ct;
 }p[20];
-
 int main(){
     int j,n,i;
     printf("enter no of process: ");
@@ -27,16 +26,15 @@ int main(){
         }
     p[0].tat=p[0].bt;
     p[0].wt=p[0].at;
+    p[0].ct=p[0].bt;
     float avgwt=p[0].wt;
     float avgtat=p[0].tat;
-    p[0].ct=p[0].bt;
     for (i=1;i<n;i++){
         p[i].ct=p[i-1].ct+p[i].bt;
         p[i].tat=p[i].ct-p[i].at;
         p[i].wt=p[i-1].ct-p[i].at;
         avgtat+=p[i].tat;
         avgwt+=p[i].wt;
-        
     }
     printf("------------------------------------------------------");
     printf("\nProcess No Burst Time TAT\tWT\tAT\tCompletion Time\n");
