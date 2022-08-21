@@ -17,8 +17,7 @@ int main()
         }
         printf("\nenter 0 to exit");
         scanf("%d",&c);
-        if(c==0)
-            printf("\n external fragmentation is %d",size);
     }
+    printf("\n external fragmentation is %d",size);
     return 0;
 }
