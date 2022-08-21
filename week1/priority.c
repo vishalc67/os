@@ -27,9 +27,9 @@ int main(){
         }
     p[0].tat=p[0].bt;
     p[0].wt=0;
+    p[0].ct=p[0].bt;
     float avgwt=p[0].wt;
     float avgtat=p[0].tat;
-    p[0].ct=p[0].bt;
     for (i=1;i<n;i++){
         p[i].ct=p[i-1].ct+p[i].bt;
         p[i].tat=p[i].ct;
