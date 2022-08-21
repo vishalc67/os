@@ -1,108 +1,48 @@
-#include <malloc.h>
-#include <stdio.h>
-
-typedef struct {
-  int *max;
-  int *need;
-  int *alloc;
-  int isDone;
-} process;
-
-int n;
-int m;
-
-int *alloc() { return malloc(m * sizeof(int)); }
-
-void read(int *arr) {
-  for (int i = 0; i < m; i++) {
-    scanf("%d", &arr[i]);
-  }
-}
-
-void add(int *arr1, const int *arr2) {
-  for (int i = 0; i < m; i++) {
-    arr1[i] += arr2[i];
-  }
-}
-
-void sub(int *arr1, const int *arr2) {
-  for (int i = 0; i < m; i++) {
-    arr1[i] -= arr2[i];
-  }
-}
-
-int canExec(const int *available, const int *need) {
-  for (int i = 0; i < m; i++) {
-    if (need[i] > available[i])
-      return 0;
-  }
-  return 1;
-}
-
-void main() {
-  printf("Enter number of processes: ");
-  scanf("%d", &n);
-  printf("Enter number of resources: ");
-  scanf("%d", &m);
-  process p[n];
-
-  for (int i = 0; i < n; i++) {
-    p[i].max = alloc();
-    p[i].alloc = alloc();
-    p[i].need = alloc();
-    p[i].isDone = 0;
-  }
-
-  printf("Enter max alloc matrix,\n");
-  for (int i = 0; i < n; i++) {
-    read(p[i].max);
-  }
-
-  printf("Enter alloc matrix,\n");
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < m; j++) {
-      scanf("%d", &p[i].alloc[j]);
-      p[i].need[j] = p[i].max[j] - p[i].alloc[j];
+#include<stdio.h>
+void main(){
+    int alloc[10][10],need[10][10],max[10][10],flg[10]={0},rv[10];
+    int p,r,i,c,j,k,temp,ord[10],ind=0;
+    printf("enter no of processes: ");
+    scanf("%d",&p);
+    printf("enter no of resources: ");
+    scanf("%d",&r);
+    
+    for(i=0;i<p;i++){
+        printf("enter allocated resources for processes %d: ",i);
+        for(j=0;j<r;j++)
+            scanf("%d",&alloc[i][j]);
     }
-  }
-
-  printf("Enter total resources: ");
-  int *totalResources = alloc();
-  read(totalResources);
-  int *avail = alloc();
-  for (int i = 0; i < m; i++) {
-    avail[i] = totalResources[i];
-  }
-
-  for (int i = 0; i < n; i++) {
-    sub(avail, p[i].alloc);
-  }
-
-  int isPExec = 1;
-  int noOfExecP = 0;
-  while (isPExec) {
-    isPExec = 0;
-    for (int i = 0; i < n; i++) {
-      if (canExec(avail, p[i].need) && !p[i].isDone) {
-        isPExec = 1;
-        sub(avail, p[i].need);
-        add(p[i].alloc, p[i].need);
-        sub(p[i].need, p[i].need);
-        p[i].isDone = 1;
-        noOfExecP++;
-        printf("\nProcess %d is finished\n", i);
-        add(avail, p[i].alloc);
-        printf("Available resources: ");
-        for (int j = 0; j < m; j++) {
-          printf("%d ", avail[j]);
+    for(i=0;i<p;i++){
+        printf("enter max resources for processes %d: ",i);
+        for(j=0;j<r;j++){
+            scanf("%d",&max[i][j]);
+            need[i][j]=max[i][j]-alloc[i][j];
         }
-      }
     }
-    if (!isPExec) {
-      if (noOfExecP == n)
-        printf("\nSystem is in safe mode.\n");
-      else
-        printf("\nSystem is in unsafe mode.\n");
+    printf("enter resource vector: ");
+    for(i=0;i<r;i++){
+        scanf("%d",&rv[i]);
     }
-  }
+    c=0;
+    while(c<p){
+        for(i=0;i<p;i++){
+            if(flg[i]==0){
+                temp=0;
+                for(j=0;j<r;j++){
+                    if(need[i][j]<=rv[j]){
+                        temp++;
+                    }
+                }
+                if(temp==r){
+                    printf("\nresources can be allocated to processes %d",i);
+                    for(k=0;k<r;k++){
+                        rv[k]+=alloc[i][k];
+                    }
+                    c++;
+                    flg[i]=1;
+                }
+            }
+        }
+    }
+    printf("\nsystem is in safe state");
 }
