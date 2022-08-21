@@ -1,15 +1,11 @@
 #include<stdio.h>
 struct rr
 {
-    int bt;
-    int tat;
-    int wt;
-    int no;
-    int dbt;
+    int bt,tat,wt,no,dbt;
 }p[20];
 int main(){
     int j,n,i,q,time=0;
-    float wt=0,tat=0;
+    float AvgWt=0,AvgTat=0;
     printf("enter no of process");
     scanf("%d",&n);
     printf("enter burst times:\n");
@@ -36,8 +32,8 @@ int main(){
                     p[i].tat=time;
                     full-=1;
                     p[i].wt=time-p[i].dbt;
-                    wt+=p[i].wt;
-                    tat+=p[i].tat;
+                    AvgWt+=p[i].wt;
+                    AvgTat+=p[i].tat;
                 }
             }
         }
@@ -50,7 +46,7 @@ int main(){
         printf("\n");
     }
     printf("-------------------------------------------------------\n");
-    printf("Avgwt:%f \t Avgtat:%f\n",wt/n,tat/n);
+    printf("Avgwt:%f \t Avgtat:%f\n",AvgWt/n,AvgTat/n);
     printf("-------------------------------------------------------\n");
     return 0;
 }
