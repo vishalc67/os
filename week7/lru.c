@@ -61,7 +61,6 @@ int main(){
         scanf("%d",&in[i]);
     printf("Enter no of frames:");
     scanf("%d",&nf);
-    pgfaultcnt=0;
     for(i=0; i<nf; i++)
         p[i]=9999;
     lru();
