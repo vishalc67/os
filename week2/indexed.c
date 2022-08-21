@@ -1,10 +1,8 @@
 #include <stdio.h>
 
-int main() {
+void main() {
     int arr[50], temp[50], i, b, n, count, c = 1;
-    for (i = 0; i < 50; i++) {
-        arr[i] = 0;
-    }
+    for (i = 0; i < 50; i++) arr[i] = 0;
     while (c) {
         a:
         printf("enter index block:");
@@ -26,20 +24,18 @@ int main() {
                 count++;
         }
         if (count == n){
-            for (i = 0; i < n; i++)
-                arr[temp[i]] = 1;
-            printf("\nfile allocated");
-            printf("\tfile indexed");
             for (i = 0; i < n; i++) {
+                arr[temp[i]] = 1;
                 printf("\n%d\t-->\t%d:1", b, temp[i], arr[temp[i]]);
             }
+            printf("\nfile allocated");
+            printf("\tfile indexed");
         } else {
-            printf("\nallocated");
-            printf("\nenter another file indexed");
+            printf("\nNot allocated");
+            printf("\nEnter another file indexed");
             goto b;
         }
         printf("\nEnter 0 to exit:");
         scanf("%d", &c);
     }
-    return 0;
 }
